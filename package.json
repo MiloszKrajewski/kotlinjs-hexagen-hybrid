@@ -1,7 +1,7 @@
 {
-  "name": "kotlinjs-hexagen",
+  "name": "kotlinjs-hexagen-hybrid",
   "version": "0.0.0",
-  "description": "kotlinjs-hexagen",
+  "description": "kotlinjs-hexagen-hybrid",
   "main": "./src/index.js",
   "scripts": {
     "pug": "pug-script -P",

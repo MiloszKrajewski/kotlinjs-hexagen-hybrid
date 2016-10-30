@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/kotlinjs-hexagen.iml" filepath="$PROJECT_DIR$/kotlinjs-hexagen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kotlinjs-hexagen-hybrid.iml" filepath="$PROJECT_DIR$/kotlinjs-hexagen-hybrid.iml" />
     </modules>
   </component>
 </project>

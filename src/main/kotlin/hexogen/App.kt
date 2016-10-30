@@ -1,6 +1,6 @@
 package hexogen
 
-import hexogen.algorithms.Kruskal
+import hexogen.algorithms.Hybrid
 import hexogen.collections.shuffled
 import hexogen.model.Door
 import hexogen.model.Point
@@ -83,7 +83,7 @@ fun main(args: Array<String>) {
         context.fillRect(0.0, 0.0, size.x, size.y)
     }
 
-    fun animate(algorithm: Kruskal<Tile, Door>) {
+    fun animate(algorithm: Hybrid<Tile, Door>) {
         algorithm.next()?.apply {
             paint(context)
             handle = window.setTimeout({ animate(algorithm) }, 0)
@@ -91,7 +91,7 @@ fun main(args: Array<String>) {
     }
 
     fun launch() {
-        animate(Kruskal(buildWorld(WORLD_WIDTH, WORLD_HEIGHT).shuffled()))
+        animate(Hybrid(buildWorld(WORLD_WIDTH, WORLD_HEIGHT).shuffled(), 0.1, { Math.random() }))
     }
 
     fun cancel() {

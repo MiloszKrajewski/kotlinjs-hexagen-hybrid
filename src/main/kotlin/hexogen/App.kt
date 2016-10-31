@@ -23,6 +23,8 @@ val TILE_MARGIN = (TILE_R - TILE_H) * 2
 val TILE_COLOR = "#fff"
 val DOOR_COLOR = "#eee"
 
+val KRUSKAL_BIAS = 0.1
+
 fun Tile.center(): Point {
     val rx = x * TILE_H * 2 + TILE_R
     val ry = y * TILE_R * 2 + TILE_H + (x % 2) * TILE_R
@@ -91,7 +93,9 @@ fun main(args: Array<String>) {
     }
 
     fun launch() {
-        animate(Hybrid(buildWorld(WORLD_WIDTH, WORLD_HEIGHT).shuffled(), 0.1, { Math.random() }))
+        animate(Hybrid(
+                buildWorld(WORLD_WIDTH, WORLD_HEIGHT).shuffled(),
+                KRUSKAL_BIAS, { Math.random() }))
     }
 
     fun cancel() {

@@ -12,7 +12,7 @@ class Hybrid<N, E : Edge<N>>(edges: Sequence<E>, threshold: Double, rng: () -> D
     private val threshold = threshold
     private val map = mapEdges(edges)
     private val kruskal = Kruskal(edges)
-    private val tracer = Tracer({ node: N -> getEdges(node) })
+    private val trailblazer = Trailblazer({ node: N -> getEdges(node) })
 
     private fun mapEdges(edges: Sequence<E>): Map<N, List<E>> {
         val result = mutableMapOf<N, MutableList<E>>()
@@ -27,22 +27,22 @@ class Hybrid<N, E : Edge<N>>(edges: Sequence<E>, threshold: Double, rng: () -> D
     private fun getEdges(node: N): Sequence<E> =
             map[node]?.asSequence() ?: emptySequence<E>()
 
-    private fun nextTracer(): E? =
-            (if (rng() < threshold) null else tracer.next())?.apply {
+    private fun nextTrailblazer(): E? =
+            (if (rng() < threshold) null else trailblazer.next())?.apply {
                 kruskal.merge(A, B)
             }
 
     private fun nextKruskal(): E? =
             kruskal.next()?.apply {
-                tracer.visit(A)
-                tracer.visit(B)
-                tracer.reset(if (rng() < 0.5) A else B)
+                trailblazer.visit(A)
+                trailblazer.visit(B)
+                trailblazer.reset(if (rng() < 0.5) A else B)
             }
 
-    fun next(): E? = nextTracer() ?: nextKruskal()
+    fun next(): E? = nextTrailblazer() ?: nextKruskal()
 }
 
-class Tracer<N, E : Edge<N>>(edges: (N) -> Sequence<E>) {
+class Trailblazer<N, E : Edge<N>>(edges: (N) -> Sequence<E>) {
     private val edges = edges
     private val visited = mutableSetOf<N>()
     private var head: N? = null
